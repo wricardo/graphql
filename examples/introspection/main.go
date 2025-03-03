@@ -12,8 +12,8 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-	smap := graphql.GetSchemaMap(res.Data.Schema)
-	for k, _ := range smap {
+	smap := graphql.GetSchemaMapString(res.Data.Schema)
+	for k := range smap {
 		fmt.Println(k)
 		/*
 			enum.__DirectiveLocation

@@ -24,6 +24,7 @@ type (
 		Types            []FullType `json:"types,omitempty"`
 		Directives       []Field    `json:"directives,omitempty"`
 		Queries          []Field    `json:"queries,omitempty"`
+		Mutations        []Field    `json:"mutations,omitempty"`
 	}
 )
 
@@ -37,6 +38,19 @@ func (s *Schema) GetQueries() []Field {
 		}
 	}
 	return tmp
+}
+
+func (s *Schema) GetQuery(name string) Field {
+	for _, v := range s.Types {
+		if v.Kind == "OBJECT" && v.Name == s.QueryType.Name {
+			for _, f := range v.Fields {
+				if f.Name == name {
+					return f
+				}
+			}
+		}
+	}
+	return Field{}
 }
 
 func (s *Schema) GetMutations() []Field {

@@ -39,6 +39,7 @@ func Introspect(addr string) (IntrospectionResponse, error) {
 	}
 
 	cfg.Data.Schema.Queries = cfg.Data.Schema.GetQueries()
+	cfg.Data.Schema.Mutations = cfg.Data.Schema.GetMutations()
 
 	return cfg, nil
 }
