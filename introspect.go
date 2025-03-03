@@ -154,25 +154,33 @@ func GetSchemaMapString(schema Schema) map[string]string {
 		if v.Name == schema.QueryType.Name {
 			for _, f := range v.Fields {
 				types["query."+f.Name] = PrettyPrintField(f)
+				types[f.Name] = PrettyPrintField(f)
 			}
 		} else if v.Name == schema.MutationType.Name {
 			for _, f := range v.Fields {
 				types["mutation."+f.Name] = PrettyPrintField(f)
+				types[f.Name] = PrettyPrintField(f)
 			}
 		} else if v.Name == schema.SubscriptionType.Name {
 			for _, f := range v.Fields {
 				types["subscription."+f.Name] = PrettyPrintField(f)
+				types[f.Name] = PrettyPrintField(f)
 			}
 		} else if v.Kind == "SCALAR" {
 			types["scalar."+v.Name] = PrettyPrintFullType(v)
+			types[v.Name] = PrettyPrintFullType(v)
 		} else if v.Kind == "ENUM" {
 			types["enum."+v.Name] = PrettyPrintFullType(v)
+			types[v.Name] = PrettyPrintFullType(v)
 		} else if v.Kind == "INTERFACE" {
 			types["interface."+v.Name] = PrettyPrintFullType(v)
+			types[v.Name] = PrettyPrintFullType(v)
 		} else if v.Kind == "INPUT_OBJECT" {
 			types["input."+v.Name] = PrettyPrintFullType(v)
+			types[v.Name] = PrettyPrintFullType(v)
 		} else {
 			types["type."+v.Name] = PrettyPrintFullType(v)
+			types[v.Name] = PrettyPrintFullType(v)
 		}
 
 	}
