@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-func Introspect(addr string) (IntrospectionResponse, error) {
+func Introspect(addr string, headers http.Header) (IntrospectionResponse, error) {
 	r := map[string]string{
 		"operationName": "IntrospectionQuery",
 		"query":         query,
@@ -19,6 +19,9 @@ func Introspect(addr string) (IntrospectionResponse, error) {
 	}
 	req, err := http.NewRequest("POST", addr, bytes.NewBuffer(encoded))
 	req.Header.Set("Content-Type", "application/json")
+	for k, v := range headers {
+		req.Header[k] = v
+	}
 	if err != nil {
 		return IntrospectionResponse{}, err
 	}

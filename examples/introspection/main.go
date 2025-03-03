@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	res, err := graphql.Introspect("https://countries.trevorblades.com/graphql")
+	res, err := graphql.Introspect("https://countries.trevorblades.com/graphql", nil)
 	if err != nil {
 		fmt.Println(err)
 		return
