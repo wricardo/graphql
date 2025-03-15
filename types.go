@@ -118,7 +118,11 @@ func (typ FullType) String() string {
 		schemaSnippet += fmt.Sprintf("\t%s: %s\n", field.Name, field.Type.String())
 	}
 	for _, field := range typ.Fields {
-		schemaSnippet += fmt.Sprintf("\t%s: %s\n", field.Name, field.Type.String())
+		if len(field.Args) > 0 {
+			schemaSnippet += fmt.Sprintf("\t%s(%s): %s\n", field.Name, ArgsToString(field.Args), field.Type.String())
+		} else {
+			schemaSnippet += fmt.Sprintf("\t%s: %s\n", field.Name, field.Type.String())
+		}
 	}
 	for _, field := range typ.EnumValues {
 		schemaSnippet += fmt.Sprintf("\t%s\n", field.Name)
